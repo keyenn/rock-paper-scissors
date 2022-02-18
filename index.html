@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rock Paper Scissors</title>
+</head>
+<body>
+    <script>
+        console.log(game());
+
+        function playerSelection()
+        {
+            let playerOgSelection = prompt("Choose rock, paper, scissors: ");
+            let playerSelection = playerOgSelection.toLowerCase();
+            return playerSelection;
+        }
+
+        function computerPlay()
+        {
+            let possiblePlays = ["rock", "paper", "scissors"];
+            let randomPlay = possiblePlays[Math.floor(Math.random() * possiblePlays.length)];
+            return randomPlay;
+        }
+
+        function singleRound(player, computer)
+        {
+            let playerScore = 0;
+
+            if (player == "rock" && computer == "paper")
+            {
+                playerScore--;
+            }
+            else if (player == "rock" && computer == "scissors")
+            {
+                playerScore++;
+            }
+            else if (player == "paper" && computer == "rock")
+            {
+                playerScore++;
+            }
+            else if (player == "paper" && computer == "scissors")
+            {
+                playerScore--;
+            }
+            else if (player == "scissors" && computer == "rock")
+            {
+                playerScore--;
+            }
+            else if (player == "scissors" && computer == "paper")
+            {
+                playerScore++;
+            }
+            else
+            {
+                playerScore += 0;
+            }
+            return playerScore;
+        }
+
+        function game()
+        {
+            let points = 0;
+            let result;
+
+            for (let i = 0; i < 5; i++)
+            {
+                let roundResult = singleRound(playerSelection(), computerPlay());
+                if (roundResult > 0)
+                {
+                    points++;
+                }
+                else if (roundResult < 0)
+                {
+                    points--;
+                }
+                else
+                {
+                    points += 0;
+                }
+                console.log(roundResult);
+            }
+            if (points > 0)
+            {
+                result = "You win!";
+            }
+            if (points == 0)
+            {
+                result = "It's a tie!";
+            }
+            else if (points < 0)
+            {
+                result = "You lose!";
+            }
+            return result;
+        }
+    </script>
+</body>
+</html>
