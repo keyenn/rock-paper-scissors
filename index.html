@@ -7,15 +7,176 @@
     <title>Rock Paper Scissors</title>
 </head>
 <body>
+    <h3>PLAY A GAME OF ROCK, PAPER, SCISSORS AGAINST THE COMPUTER</h3>
+    <h4>FIRST TO GET 5 POINTS WINS!</h4>
+    <div id="scores">
+        <p class="playerScore">Player Score: </p>
+        <p class="computerScore">Computer Score: </p>
+    </div>
+    <div id="container">
+        <button class="rock">Rock</button>
+        <button class="paper">Paper</button>
+        <button class="scissors">Scissors</button>
+    </div>
+    <div id="results"></div>
+    <div id="gameResult"></div>
     <script>
-        console.log(game());
+        const rockButton = document.querySelector(".rock");
+        const paperButton = document.querySelector(".paper");
+        const scissorsButton = document.querySelector(".scissors");
+        const result = document.querySelector("#results");
+        let singleResult = document.createElement("p");
+        result.appendChild(singleResult);
+        let playerScore = document.querySelector(".playerScore");
+        let computerScore = document.querySelector(".computerScore");
+        let yourScore = 0;
+        let otherScore = 0;
+        let gameResultParent = document.querySelector("#gameResult");
+        let gameResult = document.createElement("p");
+        gameResultParent.appendChild(gameResult);
 
-        function playerSelection()
+        rockButton.addEventListener("click", function (e) {
+            let playerSelection = "rock";
+            let roundResult = singleRound(playerSelection, computerPlay());
+            if (roundResult == "You Win!")
+            {
+                singleResult.textContent = "You Win!";
+                yourScore++;
+                playerScore.textContent = `Player Score: ${yourScore}`;
+                if (yourScore == 5)
+                {
+                    gameResult.textContent = "Congratulations! You've won the game!";
+                    yourScore = 0;
+                    otherScore = 0;
+                    playerScore.textContent = `Player Score: ${yourScore}`;
+                    computerScore.textContent = `Computer Score: ${otherScore}`;
+                }
+                else
+                {
+                    gameResult.textContent = " ";
+                }
+
+            }
+            else if (roundResult == "You Lose!")
+            {                
+                singleResult.textContent = "You Lose!";
+                otherScore++;
+                computerScore.textContent = `Computer Score: ${otherScore}`;
+                if (otherScore == 5)
+                {
+                    gameResult.textContent = "You've lost! The Computer won the game!";
+                    yourScore = 0;
+                    otherScore = 0;
+                    playerScore.textContent = `Player Score: ${yourScore}`;
+                    computerScore.textContent = `Computer Score: ${otherScore}`;
+                }
+                else
+                {
+                    gameResult.textContent = " ";
+                }
+            }
+            else
+            {
+                singleResult.textContent = "It's a Tie!";
+            }
+        });
+
+        paperButton.addEventListener("click", function (e) {
+            let playerSelection = "paper";
+            let roundResult = singleRound(playerSelection, computerPlay());
+            if (roundResult == "You Win!")
+            {
+                singleResult.textContent = "You Win!";
+                yourScore++;
+                playerScore.textContent = `Player Score: ${yourScore}`;
+                if (yourScore == 5)
+                {
+                    gameResult.textContent = "Congratulations! You've won the game!";
+                    yourScore = 0;
+                    otherScore = 0;
+                    playerScore.textContent = `Player Score: ${yourScore}`;
+                    computerScore.textContent = `Computer Score: ${otherScore}`;
+                }
+                else
+                {
+                    gameResult.textContent = " ";
+                }
+            }
+            else if (roundResult == "You Lose!")
+            {                
+                singleResult.textContent = "You Lose!";
+                otherScore++;
+                computerScore.textContent = `Computer Score: ${otherScore}`;
+                if (otherScore == 5)
+                {
+                    gameResult.textContent = "You've lost! The Computer won the game!";
+                    yourScore = 0;
+                    otherScore = 0;
+                    playerScore.textContent = `Player Score: ${yourScore}`;
+                    computerScore.textContent = `Computer Score: ${otherScore}`;
+                }
+                else
+                {
+                    gameResult.textContent = " ";
+                }
+            }
+            else
+            {
+                singleResult.textContent = "It's a Tie!";
+            }
+        });
+
+        scissorsButton.addEventListener("click", function (e) {
+            let playerSelection = "scissors";
+            let roundResult = singleRound(playerSelection, computerPlay());
+            if (roundResult == "You Win!")
+            {
+                singleResult.textContent = "You Win!";
+                yourScore++;
+                playerScore.textContent = `Player Score: ${yourScore}`;
+                if (yourScore == 5)
+                {
+                    gameResult.textContent = "Congratulations! You've won the game!";
+                    yourScore = 0;
+                    otherScore = 0;
+                    playerScore.textContent = `Player Score: ${yourScore}`;
+                    computerScore.textContent = `Computer Score: ${otherScore}`;
+                }
+                else
+                {
+                    gameResult.textContent = " ";
+                }
+            }
+            else if (roundResult == "You Lose!")
+            {                
+                singleResult.textContent = "You Lose!";
+                otherScore++;
+                computerScore.textContent = `Computer Score: ${otherScore}`;
+                if (otherScore == 5)
+                {
+                    gameResult.textContent = "You've lost! The Computer won the game!";
+                    yourScore = 0;
+                    otherScore = 0;
+                    playerScore.textContent = `Player Score: ${yourScore}`;
+                    computerScore.textContent = `Computer Score: ${otherScore}`;
+                }
+                else
+                {
+                    gameResult.textContent = " ";
+                }
+            }
+            else
+            {
+                singleResult.textContent = "It's a Tie!";
+            }
+        });
+
+        /*function playerSelection()
         {
             let playerOgSelection = prompt("Choose rock, paper, scissors: ");
             let playerSelection = playerOgSelection.toLowerCase();
             return playerSelection;
-        }
+        }*/
 
         function computerPlay()
         {
@@ -27,6 +188,7 @@
         function singleRound(player, computer)
         {
             let playerScore = 0;
+            let finalResult = " ";
 
             if (player == "rock" && computer == "paper")
             {
@@ -56,10 +218,24 @@
             {
                 playerScore += 0;
             }
-            return playerScore;
+            if (playerScore > 0)
+            {
+                finalResult = "You Win!";
+                return finalResult;
+            }
+            else if (playerScore < 0)
+            {
+                finalResult = "You Lose!";
+                return finalResult;
+            }
+            else
+            {
+                finalResult = "It's a Tie!";
+                return finalResult;
+            }
         }
 
-        function game()
+        /* function game()
         {
             let points = 0;
             let result;
@@ -94,7 +270,7 @@
                 result = "You lose!";
             }
             return result;
-        }
+        } */ 
     </script>
 </body>
 </html>
